@@ -1,3 +1,6 @@
+export GRID_HOME=/home/grid
+export PATH=$PATH:$GRID_HOME/bin
+
 # 二、基础集群部署 - kubernetes-simple
 ## 1. 部署ETCD（主节点）
 #### 1.1 简介

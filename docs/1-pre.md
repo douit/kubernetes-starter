@@ -1,12 +1,24 @@
+userdel grid
+groupdel grid
+groupadd grid
+mkdir -p /home/grid
+useradd -g grid grid
+chown -R  grid:grid /home/grid
+mkdir -p /home/grid
+chmod -R 775 /home/grid
+chown -R grid:grid /home/grid
+usermod -d /home/grid grid
+
+
 # 一、预先准备环境
 ## 1. 准备服务器
 这里准备了三台ubuntu虚拟机，每台一核cpu和2G内存，配置好root账户，并安装好了docker，后续的所有操作都是使用root账户。虚拟机具体信息如下表：
 
 | 系统类型 | IP地址 | 节点角色 | CPU | Memory | Hostname |
 | :------: | :--------: | :-------: | :-----: | :---------: | :-----: |
-| ubuntu16.04 | 192.168.1.101 | worker |   1    | 2G | server01 |
-| ubuntu16.04 | 192.168.1.102 | master |   1    | 2G | server02 |
-| ubuntu16.04 | 192.168.1.103 | worker |   1    | 2G | server03 |
+| ubuntu16.04 | 172.26.254.220 | master |   1    | 2G | node0 |
+| ubuntu16.04 | 172.26.254.221 | worker |   1    | 2G | node1 |
+| ubuntu16.04 | 172.26.254.222 | worker |   1    | 2G | node2 |
 
 > 使用centos的同学也可以参考此文档，需要注意替换系统命令即可
 
@@ -90,9 +102,9 @@ $ sysctl -p /etc/sysctl.d/k8s.conf
 #配置host，使每个Node都可以通过名字解析到ip地址
 $ vi /etc/hosts
 #加入如下片段(ip地址和servername替换成自己的)
-192.168.1.101 server01
-192.168.1.102 server02
-192.168.1.103 server03
+172.26.254.220 node0
+172.26.254.221 node1
+172.26.254.222 node2
 ```
 
 ## 4. 准备二进制文件（所有节点）

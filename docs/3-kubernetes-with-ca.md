@@ -138,7 +138,7 @@ $ systemctl daemon-reload
 $ service etcd start
 #验证etcd服务（endpoints自行替换）
 $ ETCDCTL_API=3 etcdctl \
-  --endpoints=https://192.168.1.102:2379  \
+  --endpoints=https://172.26.254.220:2379  \
   --cacert=/etc/kubernetes/ca/ca.pem \
   --cert=/etc/kubernetes/ca/etcd/etcd.pem \
   --key=/etc/kubernetes/ca/etcd/etcd-key.pem \
@@ -247,7 +247,7 @@ admin.csr  admin-csr.json  admin-key.pem  admin.pem
 $ kubectl config set-cluster kubernetes \
         --certificate-authority=/etc/kubernetes/ca/ca.pem \
         --embed-certs=true \
-        --server=https://192.168.1.102:6443
+        --server=https://172.26.254.220:6443
 #设置客户端认证参数，指定admin证书和秘钥
 $ kubectl config set-credentials admin \
         --client-certificate=/etc/kubernetes/ca/admin/admin.pem \
@@ -347,7 +347,7 @@ $ kubectl create clusterrolebinding kubelet-bootstrap \
 $ kubectl config set-cluster kubernetes \
         --certificate-authority=/etc/kubernetes/ca/ca.pem \
         --embed-certs=true \
-        --server=https://192.168.1.102:6443 \
+        --server=https://172.26.254.220:6443 \
         --kubeconfig=bootstrap.kubeconfig
 #设置客户端认证参数(注意替换token)
 $ kubectl config set-credentials kubelet-bootstrap \
@@ -423,7 +423,7 @@ kube-proxy.csr  kube-proxy-csr.json  kube-proxy-key.pem  kube-proxy.pem
 $ kubectl config set-cluster kubernetes \
         --certificate-authority=/etc/kubernetes/ca/ca.pem \
         --embed-certs=true \
-        --server=https://192.168.1.102:6443 \
+        --server=https://172.26.254.220:6443 \
         --kubeconfig=kube-proxy.kubeconfig
 #置客户端认证参数
 $ kubectl config set-credentials kube-proxy \

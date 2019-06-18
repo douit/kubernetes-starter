@@ -12,7 +12,7 @@ export PATH=$PATH:$GRID_HOME/bin
 
 ```bash
 #把服务配置文件copy到系统服务目录
-$ cp ~/kubernetes-starter/target/master-node/etcd.service /lib/systemd/system/
+$ cp /home/grid/kubernetes-starter/target/master-node/etcd.service /lib/systemd/system/
 #enable服务
 $ systemctl enable etcd.service
 #创建工作目录(保存数据的地方)
@@ -198,7 +198,7 @@ kubectl config set-context kubernetes --cluster=kubernetes
 #选择默认的上下文
 kubectl config use-context kubernetes
 ```
-> 通过上面的设置最终目的是生成了一个配置文件：~/.kube/config，当然你也可以手写或复制一个文件放在那，就不需要上面的命令了。
+> 通过上面的设置最终目的是生成了一个配置文件：/root/.kube/config，当然你也可以手写或复制一个文件放在那，就不需要上面的命令了。
 
 ## 7. 配置kubelet（工作节点）
 #### 7.1 简介
@@ -207,14 +207,12 @@ kubectl config use-context kubernetes
 **通过系统服务方式部署，但步骤会多一些，具体如下：**
 ```bash
 #确保相关目录存在
-$ mkdir -p /var/lib/kubelet
-$ mkdir -p /etc/kubernetes
-$ mkdir -p /etc/cni/net.d
+$ mkdir -p /var/lib/kubelet /etc/kubernetes /etc/cni/net.d
 
 #复制kubelet服务配置文件
 $ cp target/worker-node/kubelet.service /lib/systemd/system/
 #复制kubelet依赖的配置文件
-$ cp target/worker-node/kubelet.kubeconfig /etc/kubernetes/
+$ cp target/worker-node/kubelet.kubeconfig /etc/kubernetes/  #######???
 #复制kubelet用到的cni插件配置文件
 $ cp target/worker-node/10-calico.conf /etc/cni/net.d/
 
@@ -245,7 +243,7 @@ ExecStart=/home/grid/bin/kubelet \\
   ...  
 
 **kubelet.kubeconfig**  
-kubelet依赖的一个配置，格式看也是我们后面经常遇到的yaml格式，描述了kubelet访问apiserver的方式
+kubelet依赖的一个配置，格式看也是我们后面经常遇到的yaml格式，描述了kubelet访问apiserver的方式   #####???
 > apiVersion: v1  
 > clusters:  
 > \- cluster:  
@@ -290,9 +288,9 @@ calico作为kubernets的CNI插件的配置
 #确保工作目录存在
 $ mkdir -p /var/lib/kube-proxy
 #复制kube-proxy服务配置文件
-$ cp target/worker-node/kube-proxy.service /lib/systemd/system/
+$ cp target/worker-node/kube-proxy.service /lib/systemd/system/           
 #复制kube-proxy依赖的配置文件
-$ cp target/worker-node/kube-proxy.kubeconfig /etc/kubernetes/
+$ cp target/worker-node/kube-proxy.kubeconfig /etc/kubernetes/    ####???
 
 $ systemctl enable kube-proxy.service
 $ service kube-proxy start
@@ -329,7 +327,7 @@ kube-dns.yaml文件基本与官方一致（除了镜像名不同外）。
 里面配置了多个组件，之间使用”---“分隔
 ```bash
 #到kubernetes-starter目录执行命令
-$ kubectl create -f target/services/kube-dns.yaml
+$ kubectl create -f target/services/kube-dns.yaml   ####???
 ```
 #### 10.3 重点配置说明
 请直接参考配置文件中的注释。

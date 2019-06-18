@@ -130,7 +130,7 @@ kubernetes的安装有几种方式，不管是kube-admin还是社区贡献的部
 $ cd
 $ git clone https://github.com/liuyi01/kubernetes-starter.git
 #看看git内容
-$ cd ~/kubernetes-starter && ls
+$ cd /home/grid/kubernetes-starter && ls
 ```
 #### 5.2 文件说明
 - **gen-config.sh**
@@ -152,7 +152,7 @@ $ cd ~/kubernetes-starter && ls
 在每个节点上都生成一遍，把所有配置都生成好，后面会根据节点类型去使用相关的配置。
 ```bash
 #cd到之前下载的git代码目录
-$ cd ~/kubernetes-starter
+$ cd /home/grid/kubernetes-starter
 #编辑属性配置（根据文件注释中的说明填写好每个key-value）
 $ vi config.properties
 #生成配置文件，确保执行过程没有异常信息

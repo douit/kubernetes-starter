@@ -18,7 +18,7 @@
 ## 2. 搞定配置
 配置的模板已经为大家准备好了，但是还需要大家做一下处理才能使用哦，参考下面脚本：
 ```bash
-$ cd ~/kubernetes-starter/service-config/
+$ cd /home/grid/kubernetes-starter/service-config/
 $ ls
 api-gateway.yaml     message-service.yaml
 course-service.yaml  user-service.yaml
